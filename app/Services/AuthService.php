@@ -30,7 +30,7 @@ class AuthService {
         $token = JWTAuth::fromUser($user);
 
         return [
-            'user' => user->load('employee.position'),
+            'user' => $user->load('employee.position'),
             'token' => $token
         ];
     }

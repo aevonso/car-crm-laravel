@@ -23,7 +23,7 @@ class AuthController extends Controller
                 'user' => new UserResource($result['user']),
                 'token' => $result['token'],
                 'token_type' => 'bearer',
-                'expires_id' => auth()->factory()->getTTL()*60
+                'expires_id' => auth('api')->factory()->getTTL()*60
             ]
             ], 201);
     }
@@ -64,7 +64,7 @@ class AuthController extends Controller
             'data' =>[
                 'token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => auth()->factory()->getTTL()*60
+                'expires_in' => auth('api')->factory()->getTTL()*60
             ]
         ]);
     }

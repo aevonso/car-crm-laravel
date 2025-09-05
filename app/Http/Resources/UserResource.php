@@ -22,7 +22,8 @@ class UserResource extends JsonResource
                 return [
                     'first_name' => $this->employee->first_name,
                     'last_name' =>  $this->employee->last_name,
-                    'position' => $this->employee->position->name
+                    'phone' => $this->employee->phone,
+                    'position' => $this->employee->position->name ?? null
                 ];
             }),
             'created_at' => $this->created_at,
