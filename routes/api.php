@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CarController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +18,11 @@ Route::prefix('auth')->group(function () {
         Route::get('logout', [AuthController::class, 'logout']);
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::get('me', [AuthController::class, 'me']);
+
     });
+});
+
+//cars
+Route::middleware('auth:api')->group(function () {
+    Route::get('/available-cars', [CarController::class, 'getAvailableCars']);
 });
