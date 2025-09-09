@@ -11,14 +11,11 @@
 
 Здравствуйте, меня зовут Николас. Выполнил задачу для отслеживания автомобилей внутри компании. Для вашего удобства предотсавлю вам документацию API в постман и .env. Также хочу заметить, при миграции будут добавлены тестовые значения, что упростит вам проверку:)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Документация Postman]([https://laravel.com/docs/routing](https://lively-astronaut-179920.postman.co/workspace/API~1fbe64a2-bdba-4aa7-b5da-cae9c1d126f2/collection/27047596-72b783de-9850-44e2-b830-def504f74e66?action=share&creator=27047596)).
+- [.env](https://disk.yandex.ru/d/nP_fJGZR2tswmg).
+  
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Спасибо за уделенное время, жду обратной связи. желательно в телегу:)
+Username: @aevonso
 
 
