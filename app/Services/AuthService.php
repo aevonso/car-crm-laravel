@@ -23,7 +23,6 @@ class AuthService {
             'phone' => $data['phone'] ?? null,
         ]);
 
-        // Используем JWTAuth вместо Auth::guard('api')
         $token = JWTAuth::fromUser($user);
 
         return [
@@ -33,7 +32,6 @@ class AuthService {
     }
 
     public function login(array $credentials): ?array {
-        // Используем JWTAuth вместо Auth::guard('api')
         if(!$token = JWTAuth::attempt($credentials)) {
             return null;
         }

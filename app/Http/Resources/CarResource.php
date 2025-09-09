@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Car;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -15,6 +15,7 @@ class CarResource extends JsonResource
             'brand' => $this->carModel->brand->name,
             'color' => $this->color->name,
             'license_plate' => $this->license_plate,
+            'vin_code' => $this->vin_code,
             'year' => $this->year,
             'mileage' => $this->mileage,
             'comfort_category' => [
@@ -28,7 +29,9 @@ class CarResource extends JsonResource
                 'license_number' => $this->driver->license_number
             ],
             'features' => $this->features,
-            'is_active' => $this->is_active
+            'is_active' => $this->is_active,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }

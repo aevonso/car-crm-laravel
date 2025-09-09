@@ -11,22 +11,49 @@ class AvailableCarsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'start_time' => 'required|date|after:now',
-            'end_time' => 'required|date|after:start_time',
             'model' => 'sometimes|string|max:255',
-            'comfort_category' => 'sometimes|exists:comfort_categories, id',
+            'comfort_category' => 'sometimes|exists:comfort_categories,id',
             'brand' => 'sometimes|string|max:255'
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     */
+    public function messages(): array
+    {
+        return [
+            
+            'model.string' => 'Модель должна быть строкой',
+            'model.max' => 'Модель не должна превышать 255 символов',
+            
+            'comfort_category.exists' => 'Указанная категория комфорта не существует',
+            
+            'brand.string' => 'Бренд должен быть строкой',
+            'brand.max' => 'Бренд не должен превышать 255 символов'
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     */
+    public function attributes(): array
+    {
+        return [
+            'start_time' => 'время начала',
+            'end_time' => 'время окончания',
+            'model' => 'модель',
+            'comfort_category' => 'категория комфорта',
+            'brand' => 'бренд'
         ];
     }
 }
