@@ -99,4 +99,32 @@ class CarService
             throw new \Exception('Ошибка сервера при удалении автомобиля');
         }
     }
+
+    public function getAvailableCars()
+{
+    try {
+        return Car::with([
+            'comfortCategory', 
+            'driver.employee', 
+            'carModel.brand', 
+            'color'
+        ])
+        ->where('is_active', true)
+        ->whereDoesntHave('bookings', function($query) {
+            $query->where(function($q) {
+                $q->where('status', 'approved')
+                  ->orWhere('status', 'pending');
+            })
+            ->where(function($q) {
+                $q->where('start_time', '<=', now())
+                  ->where('end_time', '>=', now());
+            });
+        })
+        ->get();
+        
+    } catch (\Exception $e) {
+        Log::error('Ошибка при получении доступных автомобилей: ' . $e->getMessage());
+        throw new \Exception('Ошибка сервера при получении доступных автомобилей');
+    }
+}
 }
