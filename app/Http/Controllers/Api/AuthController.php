@@ -9,6 +9,7 @@ use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -23,9 +24,9 @@ class AuthController extends Controller
                 'user' => new UserResource($result['user']),
                 'token' => $result['token'],
                 'token_type' => 'bearer',
-                'expires_id' => auth('api')->factory()->getTTL()*60
+                'expires_in' => config('jwt.ttl') * 60 // Исправлено на expires_in
             ]
-            ], 201);
+        ], 201);
     }
 
     public function login(LoginRequest $request): JsonResponse {
@@ -61,17 +62,18 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Token refreshed',
-            'data' =>[
+            'data' => [
                 'token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => auth('api')->factory()->getTTL()*60
+                'expires_in' => config('jwt.ttl') * 60
             ]
         ]);
     }
     
     public function me(): JsonResponse {
+        $user = JWTAuth::user()->load('employee.position');
         return response()->json([
-            'data' => new UserResource(auth()->user()->load('employee.position'))
+            'data' => new UserResource($user)
         ]);
     }
 }

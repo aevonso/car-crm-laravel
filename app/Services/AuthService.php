@@ -7,17 +7,13 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-
 class AuthService {
     public function register(array $data): array {
-        //создание пользака
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
-        //создание сотрудника
 
         $employee = Employee::create([
             'user_id' => $user->id,
@@ -27,6 +23,7 @@ class AuthService {
             'phone' => $data['phone'] ?? null,
         ]);
 
+        // Используем JWTAuth вместо Auth::guard('api')
         $token = JWTAuth::fromUser($user);
 
         return [
@@ -36,11 +33,12 @@ class AuthService {
     }
 
     public function login(array $credentials): ?array {
+        // Используем JWTAuth вместо Auth::guard('api')
         if(!$token = JWTAuth::attempt($credentials)) {
             return null;
         }
 
-        $user = auth()->user()->load('employee.position');
+        $user = JWTAuth::user()->load('employee.position');
 
         return [
             'user' => $user,

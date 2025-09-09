@@ -5,24 +5,40 @@ use App\Http\Controllers\Api\CarController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// Маршруты аутентификации с префиксом api
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
     
-    Route::middleware('auth:api')->group(function () {
+    // ИСПОЛЬЗУЕМ JWT MIDDLEWARE
+    Route::middleware('jwt.auth')->group(function () {
         Route::get('logout', [AuthController::class, 'logout']);
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::get('me', [AuthController::class, 'me']);
-
     });
 });
 
-//cars
-Route::middleware('auth:api')->group(function () {
+// Маршруты для автомобилей - ТОЖЕ используем JWT
+Route::middleware('jwt.auth')->group(function () {
     Route::get('/available-cars', [CarController::class, 'getAvailableCars']);
+});
+
+
+
+Route::get('/debug-token', function (Request $request) {
+    try {
+        $token = $request->bearerToken();
+        $user = \Tymon\JWTAuth\Facades\JWTAuth::setToken($token)->authenticate();
+        
+        return response()->json([
+            'valid' => true,
+            'user' => $user,
+            'token' => $token
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'valid' => false,
+            'error' => $e->getMessage(),
+            'token' => $request->bearerToken()
+        ], 401);
+    }
 });
