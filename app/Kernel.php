@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http;
+namespace App;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-// Добавьте эти use statements
 use Tymon\JWTAuth\Http\Middleware\Authenticate as JWTAuthenticate;
 use Tymon\JWTAuth\Http\Middleware\RefreshToken as JWTRefreshToken;
+use Tymon\JWTAuth\Http\Middleware\Check as JWTCheck;
+
 
 class Kernel extends HttpKernel
 {
@@ -54,20 +55,21 @@ class Kernel extends HttpKernel
      *
      * @var array<string, class-string|string>
      */
-    protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
-        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        
-        // Используйте импортированные классы
-        'jwt.auth' => JWTAuthenticate::class,
-        'jwt.refresh' => JWTRefreshToken::class,
-    ];
+   protected $routeMiddleware = [
+    'auth' => \App\Http\Middleware\Authenticate::class,
+    'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+    'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
+    'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+    'can' => \Illuminate\Auth\Middleware\Authorize::class,
+    'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+    'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+    'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+    'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+    'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+    
+    'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
+    'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+    'jwt.check' => \Tymon\JWTAuth\Http\Middleware\Check::class,
+    'jwt.custom' => \App\Http\Middleware\JwtCustom::class,
+];
 }
