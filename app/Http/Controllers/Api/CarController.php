@@ -160,7 +160,6 @@ public function show($id): JsonResponse
         }
     }
 
-    // Добавим метод для available-cars
     public function getAvailableCars(): JsonResponse
     {
         try {
