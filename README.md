@@ -11,7 +11,7 @@
 
 Здравствуйте, меня зовут Николас. Выполнил задачу для отслеживания автомобилей внутри компании. Для вашего удобства предотсавлю вам документацию API в постман и .env. Также хочу заметить, при миграции будут добавлены тестовые значения, что упростит вам проверку:)
 
-- [Документация Postman]([[https://laravel.com/docs/routing](https://lively-astronaut-179920.postman.co/workspace/API~1fbe64a2-bdba-4aa7-b5da-cae9c1d126f2/collection/27047596-72b783de-9850-44e2-b830-def504f74e66?action=share&creator=27047596)](https://lively-astronaut-179920.postman.co/workspace/API~1fbe64a2-bdba-4aa7-b5da-cae9c1d126f2/collection/27047596-72b783de-9850-44e2-b830-def504f74e66?action=share&creator=27047596)).
+- [Документация Postman](https://lively-astronaut-179920.postman.co/workspace/API~1fbe64a2-bdba-4aa7-b5da-cae9c1d126f2/collection/27047596-72b783de-9850-44e2-b830-def504f74e66?action=share&creator=27047596).
 - [.env](https://disk.yandex.ru/d/nP_fJGZR2tswmg).
   
 
